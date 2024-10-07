@@ -3,19 +3,19 @@ public class Giocatore {
     private Boolean capitano;
     private int goals;
     public Giocatore (String nome, Boolean capitano, int goals) {
-        this.nome = nome;
-        this.capitano = capitano;
-        this.goals = goals;
+        setNome(nome);
+        setCapitano(capitano);
+        setGoals(goals);
     }
     public Giocatore (String nome, Boolean capitano) {
-        this.nome = nome;
-        this.capitano = capitano;
-        this.goals = 0;
+        setNome(nome);
+        setCapitano(capitano);
+        setGoals(0);
     }
     public Giocatore (String nome) {
-        this.nome = nome;
-        this.capitano = false;
-        this.goals = 0;
+        setNome(nome);
+        setCapitano(false);
+        setGoals(0);
     }
     public String getNome() {
         return nome;
