@@ -20,12 +20,8 @@ public class Giocatore {
     public String getNome() {
         return nome;
     }
-    public String getCapitano() {
-        if (capitano) {
-            return "Capitano";
-        } else {
-            return "Non capitano";
-        }
+    public Boolean getCapitano() {
+        return capitano;
     }
     public int getGoals() {
         return goals;
