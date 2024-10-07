@@ -7,6 +7,11 @@ public class Giocatore {
         this.capitano = capitano;
         this.goals = goals;
     }
+    public Giocatore (String nome, Boolean capitano) {
+        this.nome = nome;
+        this.capitano = capitano;
+        this.goals = 0;
+    }
     public String getNome() {
         return nome;
     }
