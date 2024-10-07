@@ -6,6 +6,7 @@ public class TestGiocatore {
         System.out.print("Inserisci il numero dei giocatori nella squadra: ");
         int n = input.nextInt();
         Giocatore[] squadra = new Giocatore[n];
+        // Ciclo per inizializzare tutti gli oggetti Giocatore
         for (int i = 0; i < n; i++) {
             System.out.print("Inserisci il nome del giocatore: ");
             String nome = input.next();
@@ -15,6 +16,15 @@ public class TestGiocatore {
             int goals = input.nextInt();
             squadra[i] = new Giocatore(nome, capitano, goals);
         }
+        // Istruzioni varie per usufruire dei diversi metodi set
+        int random = (int) (Math.random() * n-1);
+        squadra[random].setNome("Mario");
+        random = (int) (Math.random() * n-1);
+        squadra[random].setCapitano(true);
+        random = (int) (Math.random() * n-1);
+        squadra[random].setGoals(squadra[random].getGoals() + (int) (Math.random() * 10));
+
+        // Ciclo per stampare i dati di tutti gli oggetti Giocatore
         for (int i = 0; i < n; i++) {
             System.out.println("Nome: " + squadra[i].getNome());
             System.out.println("Capitano: " + squadra[i].getCapitano());
