@@ -34,15 +34,29 @@ public class TestGiocatore {
             int scelta = input.nextInt();
             switch (scelta) {
                 case 0:
-                    inserisciGiocatore();
+                    System.out.print("Inserisci il nome del giocatore: ");
+                    String nome = input.next();
+                    System.out.print("Il giocatore è capitano? (true/false): ");
+                    Boolean capitano = input.nextBoolean();
+                    capitano = slotCapitano(capitano);
+                    System.out.print("Inserisci il numero di goal segnati: ");
+                    int goals = input.nextInt();
+                    inserisciGiocatore(nome, capitano, goals);
                     break;
                 case 1:
-                    mostraSquadra();
+                    System.out.println(mostraSquadra());
                     break;
                 case 2:
                     System.out.print("Inserisci il numero del giocatore da modificare: ");
                     int num = input.nextInt();
-                    modificaGiocatore(num);
+                    System.out.print("Inserisci il nuovo nome del giocatore: ");
+                    String nome2 = input.next();
+                    System.out.print("Il giocatore è capitano? (true/false): ");
+                    Boolean capitano2 = input.nextBoolean();
+                    capitano2 = slotCapitano(capitano2);
+                    System.out.print("Inserisci il numero di goal segnati: ");
+                    int goals2 = input.nextInt();
+                    modificaGiocatore(num, nome2, capitano2, goals2);
                     break;
                 case 3:
                     System.out.print("Inserisci il numero del giocatore da rimuovere: ");
@@ -50,10 +64,10 @@ public class TestGiocatore {
                     rimuoviGiocatore(num2);
                     break;
                 case 4:
-                    visualizzaCinqueGoals();
+                    System.out.println(visualizzaCinqueGoals());
                     break;
                 case 5:
-                    visualizzaCapitano();
+                    System.out.println(visualizzaCapitano());
                     break;
                 case 6:
                     assegnaCapitanoCasualmente();
@@ -80,38 +94,25 @@ public class TestGiocatore {
         }
     }
 
-    public static void inserisciGiocatore() {
-        System.out.print("Inserisci il nome del giocatore: ");
-        String nome = input.next();
-        System.out.print("Il giocatore è capitano? (true/false): ");
-        Boolean capitano = input.nextBoolean();
-        capitano = slotCapitano(capitano);
-        System.out.print("Inserisci il numero di goal segnati: ");
-        int goals = input.nextInt();
+    public static void inserisciGiocatore(String nome, Boolean capitano, int goals) {
+
         squadra = Arrays.copyOf(squadra, squadra.length+1);
         squadra[squadra.length-1] = new Giocatore(nome, capitano, goals);
     }
 
-    public static void mostraSquadra() {
+    public static String mostraSquadra() {
+        String output = "";
         for (Giocatore giocatore : squadra) {
-            System.out.println("Nome: " + giocatore.getNome());
-            System.out.println("Capitano: " + giocatore.getCapitano());
-            System.out.println("Goal segnati: " + giocatore.getGoals());
+            output += "Nome: " + giocatore.getNome() + "\n" + "Capitano: " + giocatore.getCapitano() + "\n" + "Goal segnati: " + giocatore.getGoals() + "\n";
         }
+        return output;
     }
-    public static void modificaGiocatore( int n) {
-        System.out.print("Inserisci il nuovo nome del giocatore: ");
-        String nome = input.next();
-        System.out.print("Il giocatore è capitano? (true/false): ");
-        Boolean capitano = input.nextBoolean();
-        capitano = slotCapitano(capitano);
-        System.out.print("Inserisci il numero di goal segnati: ");
-        int goals = input.nextInt();
+    public static void modificaGiocatore(int n, String nome, Boolean capitano, int goals) {
         squadra[n].setNome(nome);
         squadra[n].setCapitano(capitano);
         squadra[n].setGoals(goals);
     }
-    public static void rimuoviGiocatore( int n) {
+    public static void rimuoviGiocatore(int n) {
         if (squadra[n].getCapitano().equals("Capitano")) {
             slotCapitanoLibero = true;
         }
@@ -119,27 +120,26 @@ public class TestGiocatore {
         squadra = Arrays.copyOf(squadra, squadra.length-1);
 
     }
-    public static void visualizzaCinqueGoals() {
+    public static String visualizzaCinqueGoals() {
+        String output = "";
         for (Giocatore giocatore : squadra) {
             if (giocatore.getGoals() >= 5) {
-                System.out.println("Nome: " + giocatore.getNome());
-                System.out.println("Capitano: " + giocatore.getCapitano());
-                System.out.println("Goal segnati: " + giocatore.getGoals());
+                output += "Nome: " + giocatore.getNome() + "\n" + "Capitano: " + giocatore.getCapitano() + "\n" + "Goal segnati: " + giocatore.getGoals() + "\n";
             }
         }
+        return output;
     }
-    public static void visualizzaCapitano() {
+    public static String visualizzaCapitano() {
         if (slotCapitanoLibero) {
-            System.out.println("Non c'è un capitano");
+            return "Non c'è un capitano";
         } else {
             for (Giocatore giocatore : squadra) {
                 if (giocatore.getCapitano().equals("Capitano")) {
-                    System.out.println("Nome: " + giocatore.getNome());
-                    System.out.println("Capitano: " + giocatore.getCapitano());
-                    System.out.println("Goal segnati: " + giocatore.getGoals());
+                    return giocatore.getNome() + " è il capitano";
                 }
             }
         }
+        return "";
     }
     public static void  assegnaCapitanoCasualmente() {
         if (slotCapitanoLibero) {
