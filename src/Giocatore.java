@@ -12,6 +12,11 @@ public class Giocatore {
         this.capitano = capitano;
         this.goals = 0;
     }
+    public Giocatore (String nome) {
+        this.nome = nome;
+        this.capitano = false;
+        this.goals = 0;
+    }
     public String getNome() {
         return nome;
     }
