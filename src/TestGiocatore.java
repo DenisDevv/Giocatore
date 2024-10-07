@@ -20,13 +20,48 @@ public class TestGiocatore {
             int goals = input.nextInt();
             squadra[i] = new Giocatore(nome, capitano, goals);
         }
-        // Istruzioni varie per usufruire dei diversi metodi set
-        int random = (int) (Math.random() * n-1);
-        squadra[random].setNome("Mario");
-        random = (int) (Math.random() * n-1);
-        squadra[random].setCapitano(slotCapitano(true));
-        random = (int) (Math.random() * n-1);
-        squadra[random].setGoals(squadra[random].getGoals() + (int) (Math.random() * 10));
+        // Menu
+        while (true) {
+            System.out.println("1. Mostra squadra");
+            System.out.println("2. Modifica giocatore");
+            System.out.println("3. Rimuovi giocatore");
+            System.out.println("4. Visualizza giocatori con almeno 5 goal");
+            System.out.println("5. Visualizza capitano");
+            System.out.println("6. Assegna capitano casualmente");
+            System.out.println("7. Esci");
+            System.out.print("Scelta: ");
+            int scelta = input.nextInt();
+            switch (scelta) {
+                case 1:
+                    mostraSquadra(squadra);
+                    break;
+                case 2:
+                    System.out.print("Inserisci il numero del giocatore da modificare: ");
+                    int num = input.nextInt();
+                    modificaGiocatore(squadra, num);
+                    break;
+                case 3:
+                    System.out.print("Inserisci il numero del giocatore da rimuovere: ");
+                    int num2 = input.nextInt();
+                    rimuoviGiocatore(squadra, num2);
+                    break;
+                case 4:
+                    visualizzaCinqueGoals(squadra);
+                    break;
+                case 5:
+                    visualizzaCapitano(squadra);
+                    break;
+                case 6:
+                    assegnaCapitanoCasualmente(squadra);
+                    break;
+                case 7:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Scelta non valida");
+                    break;
+            }
+        }
     }
     public static Boolean slotCapitano(Boolean capitano) {
         if (slotCapitanoLibero) {
@@ -60,8 +95,12 @@ public class TestGiocatore {
         squadra[n].setGoals(goals);
     }
     public static void rimuoviGiocatore(Giocatore[] squadra, int n) {
+        if (squadra[n].getCapitano().equals("Capitano")) {
+            slotCapitanoLibero = true;
+        }
         squadra[n] = squadra[squadra.length-1];
         Arrays.copyOf(squadra, squadra.length-1);
+
     }
     public static void visualizzaCinqueGoals(Giocatore[] squadra) {
         for (Giocatore giocatore : squadra) {
@@ -86,9 +125,10 @@ public class TestGiocatore {
         }
     }
     public static void  assegnaCapitanoCasualmente(Giocatore [] squadra) {
-        if (!slotCapitanoLibero) {
+        if (slotCapitanoLibero) {
             int random = (int) (Math.random() * squadra.length-1);
             squadra[random].setCapitano(slotCapitano(true));
+            slotCapitanoLibero = false;
         }
     }
 
