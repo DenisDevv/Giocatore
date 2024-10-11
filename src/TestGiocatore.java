@@ -113,7 +113,7 @@ public class TestGiocatore {
         squadra[n].setGoals(goals);
     }
     public static void rimuoviGiocatore(int n) {
-        if (squadra[n].getCapitano().equals("Capitano")) {
+        if (squadra[n].getCapitano()) {
             slotCapitanoLibero = true;
         }
         squadra[n] = squadra[squadra.length-1];
@@ -134,7 +134,7 @@ public class TestGiocatore {
             return "Non c'è un capitano";
         } else {
             for (Giocatore giocatore : squadra) {
-                if (giocatore.getCapitano().equals("Capitano")) {
+                if (giocatore.getCapitano()) {
                     return giocatore.getNome() + " è il capitano";
                 }
             }
